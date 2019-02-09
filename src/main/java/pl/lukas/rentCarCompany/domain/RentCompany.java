@@ -1,5 +1,6 @@
 package pl.lukas.rentCarCompany.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RentCompany {
@@ -14,14 +15,14 @@ public class RentCompany {
 //    public RentCompany() {
 //    }
 //
-//    public RentCompany(String name, String webDomain, String address, String owner, String logo, List<Department> department) {
-//        this.name = name;
-//        this.webDomain = webDomain;
-//        this.address = address;
-//        this.owner = owner;
-//        this.logo = logo;
-//        this.department = department;
-//    }
+    public RentCompany(String name, String webDomain, String address, String owner, String logo) {
+        this.name = name;
+        this.webDomain = webDomain;
+        this.address = address;
+        this.owner = owner;
+        this.logo = logo;
+        this.department = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
@@ -74,7 +75,7 @@ public class RentCompany {
     @Override
     public String toString() {
         return "RentCompany{" +
-                "name='" + name + '\'' +
+                "name= '" + name + '\'' +
                 ", webDomain='" + webDomain + '\'' +
                 ", address='" + address + '\'' +
                 ", owner='" + owner + '\'' +
