@@ -23,12 +23,12 @@ public class Main {
 
         while (!action.equalsIgnoreCase("4")) {
             action = scanner.nextLine();
-            if (action.equalsIgnoreCase("1")) newCompany = createCompany(scanner, rentCompanyService);else if (action.equalsIgnoreCase("2")) {
-                if(newCompany != null) {
+            if (action.equalsIgnoreCase("1")) newCompany = createCompany(scanner, rentCompanyService);
+            else if (action.equalsIgnoreCase("2")) {
+                if (newCompany != null) {
                     //logika tworzaca depertament
 
-                }
-                else {
+                } else {
                     System.out.println("First you need create company");
                 }
 
