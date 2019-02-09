@@ -12,4 +12,10 @@ public class Employee {
     private boolean isManager;
     private Department dept;
 
+    public Employee(String name, String lastName, boolean isManager, Department dept) {
+        this.name = name;
+        this.lastName = lastName;
+        this.isManager = isManager;
+        this.dept = dept;
+    }
 }

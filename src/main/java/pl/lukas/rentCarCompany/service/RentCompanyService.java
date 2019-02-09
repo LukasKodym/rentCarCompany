@@ -9,6 +9,6 @@ public interface RentCompanyService {
 
     RentCompany createNewCompany(String name, String webDomain, String address, String owner,
                                  String logo);
-    RentCompany addDepartmentToCompany();
-    RentCompany removeDepartmentToCompany();
+
+    RentCompany handleDepartmentsFromCompany(RentCompany newCompany, String userChoice, String address);
 }
