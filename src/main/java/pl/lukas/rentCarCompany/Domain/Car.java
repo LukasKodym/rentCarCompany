@@ -2,7 +2,6 @@ package pl.lukas.rentCarCompany.Domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import sun.util.calendar.LocalGregorianCalendar;
 
 
 @Getter
@@ -15,7 +14,7 @@ public class Car {
     private int productionDate;
     private String colour;
     private int mileage;
-    private CarStatuEnum carStatuEnum;
-    private double 
+    private CarStatusEnum carStatusEnum;
+    private double costPerDay;
 
 }
