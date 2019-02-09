@@ -11,9 +11,11 @@ public class Car {
 
     private String brand;
     private String model;
-    private String type;
-    private LocalGregorianCalendar.Date productionDate;
+    private CarTypEnum carTypeEnum;
+    private int productionDate;
     private String colour;
     private int mileage;
+    private CarStatuEnum carStatuEnum;
+    private double 
 
 }
