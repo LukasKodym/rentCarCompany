@@ -2,8 +2,8 @@ package pl.lukas.rentCarCompany;
 
 import pl.lukas.rentCarCompany.domain.*;
 import pl.lukas.rentCarCompany.service.*;
-
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -26,16 +26,31 @@ public class Main {
             if (action.equalsIgnoreCase("1")) newCompany = createCompany(scanner, rentCompanyService);
             else if (action.equalsIgnoreCase("2")) {
                 if (newCompany != null) {
-                    //logika tworzaca depertament
+                    System.out.println("Do you want to create(1) or delete(2) departament ");
+                    String userChoice = scanner.nextLine();
 
+                    if (userChoice.equalsIgnoreCase("1")) {
+                        String address = scanner.nextLine();
+                        if (!checkIfDepartamentExists(address, newCompany.getDepartment())) {
+                            Department department = new Department(address);
+                            newCompany.getDepartment().add(department);
+                        }
+                    }
                 } else {
                     System.out.println("First you need create company");
                 }
-
             } else if (action.equalsIgnoreCase("3")) {
-
             }
         }
+    }
+
+    private static boolean checkIfDepartamentExists(String address, List<Department> departmentList) {
+        int size = departmentList
+                .stream()
+                .filter(d -> d.getDeptAddress().equalsIgnoreCase(address))
+                .collect(Collectors.toList()).size();
+
+        return size > 0;
     }
 
     private static RentCompany createCompany(Scanner scanner, RentCompanyService rentCompanyService) {
