@@ -26,7 +26,6 @@ public class Main {
             if (action.equalsIgnoreCase("1")) newCompany = createCompany(scanner, rentCompanyService);
             if (action.equalsIgnoreCase("2")) {
 
-                if
 
                 rentCompanyService.addDepartmentToCompany();
             }
