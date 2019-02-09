@@ -31,7 +31,7 @@ public class Main {
 
                     if (userChoice.equalsIgnoreCase("1")) {
                         String address = scanner.nextLine();
-                        if (!checkIfDepartamentExists(address, newCompany.getDepartment())) {
+                        if (!checkIfDepartmentsExists(address, newCompany.getDepartment())) {
                             Department department = new Department(address);
                             newCompany.getDepartment().add(department);
                         }
@@ -44,7 +44,7 @@ public class Main {
         }
     }
 
-    private static boolean checkIfDepartamentExists(String address, List<Department> departmentList) {
+    private static boolean checkIfDepartmentsExists(String address, List<Department> departmentList) {
         int size = departmentList
                 .stream()
                 .filter(d -> d.getDeptAddress().equalsIgnoreCase(address))
