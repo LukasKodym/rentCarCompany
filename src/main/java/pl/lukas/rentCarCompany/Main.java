@@ -23,13 +23,18 @@ public class Main {
 
         while (!action.equalsIgnoreCase("4")) {
             action = scanner.nextLine();
-            if (action.equalsIgnoreCase("1")) newCompany = createCompany(scanner, rentCompanyService);
-            if (action.equalsIgnoreCase("2")) {
+            if (action.equalsIgnoreCase("1")) newCompany = createCompany(scanner, rentCompanyService);else if (action.equalsIgnoreCase("2")) {
+                if(newCompany != null) {
+                    //logika tworzaca depertament
 
+                }
+                else {
+                    System.out.println("First you need create company");
+                }
 
-                rentCompanyService.addDepartmentToCompany();
+            } else if (action.equalsIgnoreCase("3")) {
+
             }
-            rentCompanyService.removeDepartmentToCompany();
         }
     }
 

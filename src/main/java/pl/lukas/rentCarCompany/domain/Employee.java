@@ -12,6 +12,4 @@ public class Employee {
     private boolean isManager;
     private Department dept;
 
-
-
 }
