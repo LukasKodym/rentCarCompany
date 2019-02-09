@@ -17,4 +17,6 @@ public class Car {
     private CarStatusEnum carStatusEnum;
     private double costPerDay;
 
+
+
 }

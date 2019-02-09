@@ -11,17 +11,17 @@ public class Company {
     private String logo;
     private List<Department> department;
 
-    public Company() {
-    }
-
-    public Company(String name, String webDomain, String address, String owner, String logo, List<Department> department) {
-        this.name = name;
-        this.webDomain = webDomain;
-        this.address = address;
-        this.owner = owner;
-        this.logo = logo;
-        this.department = department;
-    }
+//    public Company() {
+//    }
+//
+//    public Company(String name, String webDomain, String address, String owner, String logo, List<Department> department) {
+//        this.name = name;
+//        this.webDomain = webDomain;
+//        this.address = address;
+//        this.owner = owner;
+//        this.logo = logo;
+//        this.department = department;
+//    }
 
     public String getName() {
         return name;
