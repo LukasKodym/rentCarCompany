@@ -1,8 +1,8 @@
-package pl.lukas.rentCarCompany.Domain;
+package pl.lukas.rentCarCompany.domain;
 
 import java.util.List;
 
-public class Company {
+public class RentCompany {
 
     private String name;
     private String webDomain;
@@ -11,10 +11,10 @@ public class Company {
     private String logo;
     private List<Department> department;
 
-//    public Company() {
+//    public RentCompany() {
 //    }
 //
-//    public Company(String name, String webDomain, String address, String owner, String logo, List<Department> department) {
+//    public RentCompany(String name, String webDomain, String address, String owner, String logo, List<Department> department) {
 //        this.name = name;
 //        this.webDomain = webDomain;
 //        this.address = address;
@@ -73,7 +73,7 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" +
+        return "RentCompany{" +
                 "name='" + name + '\'' +
                 ", webDomain='" + webDomain + '\'' +
                 ", address='" + address + '\'' +

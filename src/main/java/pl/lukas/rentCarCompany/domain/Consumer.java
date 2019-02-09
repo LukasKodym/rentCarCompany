@@ -1,4 +1,4 @@
-package pl.lukas.rentCarCompany.Domain;
+package pl.lukas.rentCarCompany.domain;
 
 import lombok.Getter;
 import lombok.Setter;
