@@ -12,50 +12,74 @@ public class Main {
     //zad6. tworzenie samochodu
     //zad6b rozbudowanie aplikacji o zarzadzanie wieloma firmami
     //zad7. wypozyczenie samochodu...
+    //zad8. wypozyczenie samochodu
+    //wypozyczenie samochodu - utworzenie rezerwacji...
+    //zwrot samochodu - aktualizacja kilometrow,
+    //przypisanie samochodu do departamentu zwrotu oraz obliczenie kosztu calkowitego rezerwacji
+    //zad9. zrzut stanu aplikacji do pliku txt (dla przecwiczenia zapisu do pliku)
+    //zad10. zastapenie System.out.println przez loggera
+    //zad11. dokananie refaktoryzacji kodu  interfejsy + klasy service
+    //zad12. napisac testy jednostkowe o pokryciu 75%-80% +
+    //zad13. dodanie bazy danych + jdbc/hibernate
+    //zad14. zaimplementowanie rzeczy z pdf od zadania
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         RentCompanyService rentCompanyService = new RentCompanyServiceImpl();
-        List<Consumer> clientList = new ArrayList<>();
-        RentCompany newCompany = null;
+        RentCompany currentCompany = null;
+        List<RentCompany> companies = new ArrayList<>();
         showInstructions();
 
         String action = "";
         while (!action.equalsIgnoreCase("10")) {
             action = scanner.nextLine();
             if (action.equalsIgnoreCase("0")) {
-                System.out.println("Creating new company");
-                newCompany = createCompany(scanner, rentCompanyService);
-                System.out.println("New company created");
-            }
+                companies.forEach(company -> System.out.println(company.getName()));
+                String chosenCompanyName = scanner.nextLine();
+                currentCompany = null;
+                for (RentCompany company : companies) {
+                    if (company.getName().equalsIgnoreCase(chosenCompanyName)) {
+                        currentCompany = company;
+                        break;
+                    }
+                }
+                if (currentCompany == null) {
+                    System.out.println("Try again, company with name " +
+                            "you gave does not exist");
+                }
 
-
-            else if (action.equalsIgnoreCase("1")) {
+            } else if (action.equalsIgnoreCase("1")) {
                 System.out.println("Creating new company");
-                newCompany = createCompany(scanner, rentCompanyService);
+                currentCompany = createCompany(scanner, rentCompanyService);
                 System.out.println("New company created");
+
             } else if (action.equalsIgnoreCase("2")) {
                 System.out.println("Creating new department");
-                if (newCompany != null) {
-                    newCompany = handleCompanyDepartments(scanner, rentCompanyService, newCompany);
+                if (currentCompany != null) {
+                    currentCompany = handleCompanyDepartments(scanner, rentCompanyService, currentCompany);
                     System.out.println("New department created");
                 } else {
                     System.out.println("First you need create company");
                 }
+
             } else if (action.equalsIgnoreCase("3")) {
                 System.out.println("Display company status");
-                System.out.println(newCompany);
-                clientList.forEach(System.out::println);
+                System.out.println(currentCompany);
+                System.out.println("Dispaly clients: ");
+                currentCompany.getConsumers().forEach(System.out::println);
 
             } else if (action.equalsIgnoreCase("4")) {
                 System.out.println("Creating employee with department ,pass firstName, lastName, manager, dept address");
-                addNewEmployeeWithDepartment(scanner, newCompany, rentCompanyService);
+                addNewEmployeeWithDepartment(scanner, currentCompany, rentCompanyService);
+
             } else if (action.equalsIgnoreCase("5")) {
                 System.out.println("Creating client, pass firstName, lastName, email, address");
-                addNewConsumer(clientList, scanner);
+                addNewConsumer(currentCompany.getConsumers(), scanner);
                 System.out.println("New client created");
+
             } else if (action.equalsIgnoreCase("6")) {
                 System.out.println("Creating car");
-//                addNewCar();
+                addNewCar(scanner, (RentCompanyServiceImpl) rentCompanyService, currentCompany);
+                System.out.println("Car created");
             }
         }
     }
@@ -76,12 +100,10 @@ public class Main {
 
 
     private static void addNewConsumer(List<Consumer> clientList, Scanner scanner) {
-
         String name = scanner.nextLine();
         String lastName = scanner.nextLine();
         String email = scanner.nextLine();
         String address = scanner.nextLine();
-
         Consumer consumer = new Consumer(name, lastName, email, address);
         clientList.add(consumer);
     }
@@ -93,7 +115,6 @@ public class Main {
         String isManagerString = scanner.nextLine();
         boolean isManager = isManagerString.equalsIgnoreCase("y");
         String departmentAddress = scanner.nextLine();
-
         rentCompanyService.addEmployeeWithParams(newCompany, firstName, lastName, isManager, departmentAddress);
     }
 
@@ -103,7 +124,6 @@ public class Main {
         String userChoice = scanner.nextLine();
         System.out.println("Enter department address");
         String address = scanner.nextLine();
-
         newCompany = rentCompanyService.handleDepartmentsFromCompany(newCompany, userChoice, address);
         return newCompany;
     }
