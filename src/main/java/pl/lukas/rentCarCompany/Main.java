@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         RentCompanyService rentCompanyService = new RentCompanyServiceImpl();
+        List<Consumer> clientList = new ArrayList<>();
         RentCompany newCompany = null;
         showInstructions();
 
@@ -36,34 +37,32 @@ public class Main {
             } else if (action.equalsIgnoreCase("3")) {
                 System.out.println("Display company status");
                 System.out.println(newCompany);
+                clientList.forEach(System.out::println);
 
             } else if (action.equalsIgnoreCase("4")) {
                 System.out.println("Creating employee with department ,pass firstName, lastName, manager, dept address");
                 addNewEmployeeWithDepartment(scanner, newCompany, rentCompanyService);
             } else if (action.equalsIgnoreCase("5")) {
                 System.out.println("Creating client, pass firstName, lastName, email, address");
-                addNewConsumer(scanner);
+                addNewConsumer(clientList,scanner);
                 System.out.println("New client created");
-//todo
             } else if (action.equalsIgnoreCase("6")) {
                 System.out.println("Creating car");
 //todo
             }
-
-
         }
-
-
     }
 
-    private static Consumer addNewConsumer(Scanner scanner) {
+    private static boolean addNewConsumer(List<Consumer> clientList, Scanner scanner) {
 
         String name = scanner.nextLine();
         String lastName = scanner.nextLine();
         String email = scanner.nextLine();
         String address = scanner.nextLine();
 
-        return new Consumer(name,lastName,email,address);
+
+        Consumer consumer = new Consumer(name, lastName, email, address);
+        return clientList.add(consumer);
     }
 
     public static void addNewEmployeeWithDepartment(Scanner scanner, RentCompany newCompany, RentCompanyService rentCompanyService) {
