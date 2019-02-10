@@ -10,23 +10,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        RentCompanyService rentCompanyService = new RentCompanyServiceImpl();
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Menu:");
-        System.out.println("Option 1 to create new company - pass all needed info");
-        System.out.println("Option 2 to create department for given company");
-        System.out.println("Option 3 display company with departments");
-        System.out.println("Option 4 exit program");
-
+        RentCompanyService rentCompanyService = new RentCompanyServiceImpl();
         RentCompany newCompany = null;
+        showInstructions();
+
         String action = "";
-
-        while (!action.equalsIgnoreCase("4")) {
+        while (!action.equalsIgnoreCase("10")) {
             action = scanner.nextLine();
-            if (action.equalsIgnoreCase("1")) newCompany = createCompany(scanner, rentCompanyService);
-
-            else if (action.equalsIgnoreCase("2")) {
+            if (action.equalsIgnoreCase("1")) {
+                newCompany = createCompany(scanner, rentCompanyService);
+            } else if (action.equalsIgnoreCase("2")) {
                 if (newCompany != null) {
                     newCompany = handleCompanyDepartments(scanner, rentCompanyService, newCompany);
                 } else {
@@ -34,23 +28,31 @@ public class Main {
                 }
             } else if (action.equalsIgnoreCase("3")) {
                 System.out.println(newCompany);
+
             } else if (action.equalsIgnoreCase("4")) {
                 String firstName = scanner.nextLine();
                 String lastName = scanner.nextLine();
                 boolean isManager = scanner.nextBoolean();
                 String departmentAddress = scanner.nextLine();
 
-                findDepartmentByAddress(newCompany, departmentAddress);
+                Optional<Department> department = findDepartmentByAddress(newCompany, departmentAddress);
+
+                if (department.isPresent()) {
+                    Employee emp = new Employee(firstName, lastName, isManager, department.get());
+                    department.get().getEmployeeList().add(emp);
+                } else {
+                    System.out.println("Cannot add employee to department that does not exist");
+                }
             }
         }
     }
 
-    private static void findDepartmentByAddress(RentCompany newCompany, String deptartamentAddress) {
-
-
-
-
-
+    private static Optional<Department> findDepartmentByAddress(RentCompany newCompany, String departmentAddress) {
+        List<Department> departmentList = newCompany.getDepartment();
+        return departmentList
+                .stream()
+                .filter(dep -> dep.getDeptAddress().equalsIgnoreCase(departmentAddress))
+                .findFirst();
     }
 
     private static RentCompany createCompany(Scanner scanner, RentCompanyService rentCompanyService) {
@@ -71,9 +73,9 @@ public class Main {
 
     private static RentCompany handleCompanyDepartments(Scanner scanner, RentCompanyService
             rentCompanyService, RentCompany newCompany) {
-        System.out.println("Do you want to create(1) or delete(2) departament ");
+        System.out.println("Do you want to create(1) or delete(2) department ");
         String userChoice = scanner.nextLine();
-        System.out.println("Enter departmens address");
+        System.out.println("Enter departments address");
         String address = scanner.nextLine();
 
         newCompany = rentCompanyService.handleDepartmentsFromCompany(newCompany, userChoice, address);
@@ -85,11 +87,10 @@ public class Main {
         System.out.println("Option 1 to create new company - pass all needed info");
         System.out.println("Option 2 to create department for given company");
         System.out.println("Option 3 display company with departments");
-        System.out.println("Option 4 add new worker to given departament");
+        System.out.println("Option 4 add new worker to given department");
         System.out.println("Option 5 add new client");
         System.out.println("Option 6 add new car");
         System.out.println("Option 7 rent a car");
         System.out.println("Option 10 exit program");
-
     }
 }
