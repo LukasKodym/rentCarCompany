@@ -41,6 +41,8 @@ public class Main {
                 addNewEmployeeWithDepartment(scanner, newCompany, rentCompanyService);
             } else if (action.equalsIgnoreCase("5")) {
                 System.out.println("Creating client");
+
+                addNewConsumer()
 //todo
             } else if (action.equalsIgnoreCase("6")) {
                 System.out.println("Creating car");
@@ -53,21 +55,24 @@ public class Main {
 
     }
 
+    private static void addNewConsumer() {
+    }
+
     public static void addNewEmployeeWithDepartment(Scanner scanner, RentCompany newCompany, RentCompanyService rentCompanyService) {
         String firstName = scanner.nextLine();
         String lastName = scanner.nextLine();
         String isManagerString = scanner.nextLine();
         boolean isManager = isManagerString.equalsIgnoreCase("y");
-        String deptartamentAddress = scanner.nextLine();
+        String departmentAddress = scanner.nextLine();
 
-        rentCompanyService.addEmployeeWithParams(newCompany, firstName, lastName, isManager, deptartamentAddress);
+        rentCompanyService.addEmployeeWithParams(newCompany, firstName, lastName, isManager, departmentAddress);
     }
 
 
     private static RentCompany handleCompanyDepartments(Scanner scanner, RentCompanyService rentCompanyService, RentCompany newCompany) {
-        System.out.println("Do you want to create(1) or delete(2) departament ");
+        System.out.println("Do you want to create(1) or delete(2) department ");
         String userChoice = scanner.nextLine();
-        System.out.println("Enter departmens address");
+        System.out.println("Enter department address");
         String address = scanner.nextLine();
 
         newCompany = rentCompanyService.handleDepartmentsFromCompany(newCompany, userChoice, address);
@@ -80,14 +85,12 @@ public class Main {
         System.out.println("Option 1 to create new company - pass all needed info");
         System.out.println("Option 2 to create department for given company");
         System.out.println("Option 3 display company with departments");
-        System.out.println("Option 4 add new worker to given departament");
+        System.out.println("Option 4 add new worker to given department");
         System.out.println("Option 5 add new client");
         System.out.println("Option 6 add new car");
         System.out.println("Option 7 rent a car");
         System.out.println("Option 10 exit program");
-
     }
-
 
     private static RentCompany createCompany(Scanner scanner, RentCompanyService rentCompanyService) {
         System.out.println("Pass params");
@@ -100,6 +103,4 @@ public class Main {
         return rentCompanyService.createNewCompany(name, website,
                 address, owner, logo);
     }
-
-
 }
