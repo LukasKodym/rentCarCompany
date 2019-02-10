@@ -1,8 +1,6 @@
 package pl.lukas.rentCarCompany.service;
 
-import pl.lukas.rentCarCompany.domain.Department;
-import pl.lukas.rentCarCompany.domain.Employee;
-import pl.lukas.rentCarCompany.domain.RentCompany;
+import pl.lukas.rentCarCompany.domain.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -77,5 +75,17 @@ public class RentCompanyServiceImpl implements RentCompanyService {
                 .stream()
                 .filter(dep -> dep.getDeptAddress().equalsIgnoreCase(departmentAddress))
                 .findFirst();
+    }
+
+    public void createCarForDepartment(RentCompanyServiceImpl rentCompanyService, RentCompany newCompany, String brand, String model, CarTypesEnum carTypesEnum, int productionYear, String color, int mileage, CarStatusEnum carStatusEnum, double costPerDay, String deptAddress) {
+        Optional<Department> departmentByAddress = rentCompanyService.findDepartmentByAddress(newCompany, deptAddress);
+        if (!departmentByAddress.isPresent()) {
+            System.out.println("Departament does not exists");
+        } else {
+            Car car = new Car(brand, model, carTypesEnum,
+                    productionYear, color, mileage,
+                    carStatusEnum, costPerDay);
+            departmentByAddress.ifPresent(p -> p.getCarList().add(car));
+        }
     }
 }

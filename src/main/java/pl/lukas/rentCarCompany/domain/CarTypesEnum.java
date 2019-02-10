@@ -1,6 +1,6 @@
 package pl.lukas.rentCarCompany.domain;
 
-public enum CarTypEnum {
+public enum CarTypesEnum {
 
     // each enum should have representation as String
 
@@ -11,7 +11,7 @@ public enum CarTypEnum {
 
     private final String value;
 
-    CarTypEnum(String value) {
+    CarTypesEnum(String value) {
         this.value = value;
     }
 

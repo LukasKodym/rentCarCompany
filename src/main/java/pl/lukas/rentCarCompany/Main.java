@@ -44,28 +44,43 @@ public class Main {
                 addNewEmployeeWithDepartment(scanner, newCompany, rentCompanyService);
             } else if (action.equalsIgnoreCase("5")) {
                 System.out.println("Creating client, pass firstName, lastName, email, address");
-                addNewConsumer(clientList,scanner);
+                addNewConsumer(clientList, scanner);
                 System.out.println("New client created");
             } else if (action.equalsIgnoreCase("6")) {
                 System.out.println("Creating car");
-//todo
+//                addNewCar();
             }
         }
     }
 
-    private static boolean addNewConsumer(List<Consumer> clientList, Scanner scanner) {
+    private static void addNewCar(Scanner scanner, RentCompanyServiceImpl rentCompanyService, RentCompany newCompany) {
+        String brand = scanner.nextLine();
+        String model = scanner.nextLine();
+        CarTypesEnum carTypesEnum = CarTypesEnum.valueOf(scanner.nextLine());
+        int productionYear = Integer.parseInt(scanner.nextLine());
+        String color = scanner.nextLine();
+        int mileage = Integer.parseInt(scanner.nextLine());
+        CarStatusEnum carStatusEnum = CarStatusEnum.valueOf(scanner.nextLine());
+        double costPerDay = Double.parseDouble(scanner.nextLine());
+        String deptAddress = scanner.nextLine();
+
+        rentCompanyService.createCarForDepartment(rentCompanyService, newCompany, brand, model, carTypesEnum, productionYear, color, mileage, carStatusEnum, costPerDay, deptAddress);
+    }
+
+
+    private static void addNewConsumer(List<Consumer> clientList, Scanner scanner) {
 
         String name = scanner.nextLine();
         String lastName = scanner.nextLine();
         String email = scanner.nextLine();
         String address = scanner.nextLine();
 
-
         Consumer consumer = new Consumer(name, lastName, email, address);
-        return clientList.add(consumer);
+        clientList.add(consumer);
     }
 
-    public static void addNewEmployeeWithDepartment(Scanner scanner, RentCompany newCompany, RentCompanyService rentCompanyService) {
+    public static void addNewEmployeeWithDepartment(Scanner scanner, RentCompany newCompany,
+                                                    RentCompanyService rentCompanyService) {
         String firstName = scanner.nextLine();
         String lastName = scanner.nextLine();
         String isManagerString = scanner.nextLine();
@@ -75,8 +90,8 @@ public class Main {
         rentCompanyService.addEmployeeWithParams(newCompany, firstName, lastName, isManager, departmentAddress);
     }
 
-
-    private static RentCompany handleCompanyDepartments(Scanner scanner, RentCompanyService rentCompanyService, RentCompany newCompany) {
+    private static RentCompany handleCompanyDepartments(Scanner scanner, RentCompanyService rentCompanyService,
+                                                        RentCompany newCompany) {
         System.out.println("Do you want to create(1) or delete(2) department ");
         String userChoice = scanner.nextLine();
         System.out.println("Enter department address");
@@ -85,7 +100,6 @@ public class Main {
         newCompany = rentCompanyService.handleDepartmentsFromCompany(newCompany, userChoice, address);
         return newCompany;
     }
-
 
     private static void showInstructions() {
         System.out.println("How program works:");
