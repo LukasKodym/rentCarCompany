@@ -12,5 +12,10 @@ public class Consumer {
     private String email;
     private String address;
 
-
+    public Consumer(String name, String lastName, String email, String address) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+    }
 }
