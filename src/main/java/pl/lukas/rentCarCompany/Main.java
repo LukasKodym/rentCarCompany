@@ -22,7 +22,14 @@ public class Main {
         String action = "";
         while (!action.equalsIgnoreCase("10")) {
             action = scanner.nextLine();
-            if (action.equalsIgnoreCase("1")) {
+            if (action.equalsIgnoreCase("0")) {
+                System.out.println("Creating new company");
+                newCompany = createCompany(scanner, rentCompanyService);
+                System.out.println("New company created");
+            }
+
+
+            else if (action.equalsIgnoreCase("1")) {
                 System.out.println("Creating new company");
                 newCompany = createCompany(scanner, rentCompanyService);
                 System.out.println("New company created");

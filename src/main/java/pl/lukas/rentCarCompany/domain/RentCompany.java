@@ -10,7 +10,8 @@ public class RentCompany {
     private String address;
     private String owner;
     private String logo;
-    private List<Department> department;
+    private List<Department> departments;
+    private List<Consumer> consumers;
 
 //    public RentCompany() {
 //    }
@@ -21,7 +22,7 @@ public class RentCompany {
         this.address = address;
         this.owner = owner;
         this.logo = logo;
-        this.department = new ArrayList<>();
+        this.departments = new ArrayList<>();
     }
 
     public String getName() {
@@ -64,12 +65,20 @@ public class RentCompany {
         this.logo = logo;
     }
 
-    public List<Department> getDepartment() {
-        return department;
+    public List<Department> getDepartments() {
+        return departments;
     }
 
-    public void setDepartment(List<Department> department) {
-        this.department = department;
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
+    }
+
+    public List<Consumer> getConsumers() {
+        return consumers;
+    }
+
+    public void setConsumers(List<Consumer> consumers) {
+        this.consumers = consumers;
     }
 
     @Override
@@ -80,7 +89,7 @@ public class RentCompany {
                 ", address='" + address + '\'' +
                 ", owner='" + owner + '\'' +
                 ", logo='" + logo + '\'' +
-                ", department=" + department +
+                ", departments=" + departments +
                 '}';
     }
 }

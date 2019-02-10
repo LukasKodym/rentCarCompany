@@ -51,15 +51,15 @@ public class RentCompanyServiceImpl implements RentCompanyService {
     }
 
     public void addDepartmentToCompany(RentCompany newCompany, String address) {
-        if (!checkIfDepartmentExists(address, newCompany.getDepartment())) {
+        if (!checkIfDepartmentExists(address, newCompany.getDepartments())) {
             Department department = new Department(address);
-            newCompany.getDepartment().add(department);
+            newCompany.getDepartments().add(department);
         }
     }
 
     public void removeDepartmentToCompany(RentCompany newCompany, String address) {
-        if (checkIfDepartmentExists(address, newCompany.getDepartment())) {
-            List<Department> departmentList = newCompany.getDepartment();
+        if (checkIfDepartmentExists(address, newCompany.getDepartments())) {
+            List<Department> departmentList = newCompany.getDepartments();
             for (Department d : departmentList) {
                 if (d.getDeptAddress().equalsIgnoreCase(address)) {
                     departmentList.remove(d);
@@ -70,7 +70,7 @@ public class RentCompanyServiceImpl implements RentCompanyService {
     }
 
     private Optional<Department> findDepartmentByAddress(RentCompany newCompany, String departmentAddress) {
-        List<Department> departmentList = newCompany.getDepartment();
+        List<Department> departmentList = newCompany.getDepartments();
         return departmentList
                 .stream()
                 .filter(dep -> dep.getDeptAddress().equalsIgnoreCase(departmentAddress))
