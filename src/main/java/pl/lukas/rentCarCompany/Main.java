@@ -25,10 +25,10 @@ public class Main {
                 newCompany = createCompany(scanner, rentCompanyService);
                 System.out.println("New company created");
             } else if (action.equalsIgnoreCase("2")) {
-                System.out.println("Creating new departament");
+                System.out.println("Creating new department");
                 if (newCompany != null) {
                     newCompany = handleCompanyDepartments(scanner, rentCompanyService, newCompany);
-                    System.out.println("New departament created");
+                    System.out.println("New department created");
                 } else {
                     System.out.println("First you need create company");
                 }
@@ -37,7 +37,7 @@ public class Main {
                 System.out.println(newCompany);
 
             } else if (action.equalsIgnoreCase("4")) {
-                System.out.println("Creating empolyee with department ,pass firstName, lastName, manager, dept address");
+                System.out.println("Creating employee with department ,pass firstName, lastName, manager, dept address");
                 addNewEmployeeWithDepartment(scanner, newCompany, rentCompanyService);
             } else if (action.equalsIgnoreCase("5")) {
                 System.out.println("Creating client");
