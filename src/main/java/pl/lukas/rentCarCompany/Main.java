@@ -2,6 +2,7 @@ package pl.lukas.rentCarCompany;
 
 import pl.lukas.rentCarCompany.domain.*;
 import pl.lukas.rentCarCompany.service.*;
+
 import java.util.*;
 
 
@@ -40,9 +41,9 @@ public class Main {
                 System.out.println("Creating employee with department ,pass firstName, lastName, manager, dept address");
                 addNewEmployeeWithDepartment(scanner, newCompany, rentCompanyService);
             } else if (action.equalsIgnoreCase("5")) {
-                System.out.println("Creating client");
-
-                addNewConsumer()
+                System.out.println("Creating client, pass firstName, lastName, email, address");
+                addNewConsumer(scanner);
+                System.out.println("New client created");
 //todo
             } else if (action.equalsIgnoreCase("6")) {
                 System.out.println("Creating car");
@@ -55,7 +56,14 @@ public class Main {
 
     }
 
-    private static void addNewConsumer() {
+    private static Consumer addNewConsumer(Scanner scanner) {
+
+        String name = scanner.nextLine();
+        String lastName = scanner.nextLine();
+        String email = scanner.nextLine();
+        String address = scanner.nextLine();
+
+        return new Consumer(name,lastName,email,address);
     }
 
     public static void addNewEmployeeWithDepartment(Scanner scanner, RentCompany newCompany, RentCompanyService rentCompanyService) {
