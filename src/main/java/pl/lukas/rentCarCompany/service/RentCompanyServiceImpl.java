@@ -19,15 +19,15 @@ public class RentCompanyServiceImpl implements RentCompanyService {
         if (userChoice.equalsIgnoreCase("1")) {
             addDepartmentToCompany(newCompany, address);
         } else if (userChoice.equalsIgnoreCase("2")) {
-            removeDepartmentToCompany(newCompany, address);
+            removeDepartmentFromCompany(newCompany, address);
         } else {
             System.out.println("Wrong option, try again");
         }
         return newCompany;
     }
 
-    public void addEmployeeWithParams(RentCompany newCompany, String firstName, String lastName, boolean isManager, String deptartamentAddress) {
-        Optional<Department> department = findDepartmentByAddress(newCompany, deptartamentAddress);
+    public void addEmployeeWithParams(RentCompany newCompany, String firstName, String lastName, boolean isManager, String departmentAddress) {
+        Optional<Department> department = findDepartmentByAddress(newCompany, departmentAddress);
 
         if(department.isPresent()) {
             Employee emp = new Employee(firstName, lastName, isManager, department.get());
@@ -38,8 +38,6 @@ public class RentCompanyServiceImpl implements RentCompanyService {
             System.out.println("Cannot add employee to departament that does not exist");
         }
     }
-
-
 
     private static boolean checkIfDepartmentExists(String address, List<Department> departmentList) {
         int size = departmentList
@@ -57,7 +55,7 @@ public class RentCompanyServiceImpl implements RentCompanyService {
         }
     }
 
-    public void removeDepartmentToCompany(RentCompany newCompany, String address) {
+    public void removeDepartmentFromCompany(RentCompany newCompany, String address) {
         if (checkIfDepartmentExists(address, newCompany.getDepartments())) {
             List<Department> departmentList = newCompany.getDepartments();
             for (Department d : departmentList) {
