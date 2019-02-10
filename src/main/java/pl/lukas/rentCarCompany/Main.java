@@ -38,11 +38,17 @@ public class Main {
                 String firstName = scanner.nextLine();
                 String lastName = scanner.nextLine();
                 boolean isManager = scanner.nextBoolean();
-                String deptartamentAddress = scanner.nextLine();
+                String departmentAddress = scanner.nextLine();
 
-//                findDepartmentByAddress(newCompany, deptartamentAddress);
+                findDepartmentByAddress(newCompany, departmentAddress);
             }
         }
+    }
+
+    private static void findDepartmentByAddress(RentCompany newCompany, String deptartamentAddress) {
+
+
+
     }
 
     private static RentCompany createCompany(Scanner scanner, RentCompanyService rentCompanyService) {
