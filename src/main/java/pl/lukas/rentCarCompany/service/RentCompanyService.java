@@ -11,4 +11,6 @@ public interface RentCompanyService {
                                  String logo);
 
     RentCompany handleDepartmentsFromCompany(RentCompany newCompany, String userChoice, String address);
+    void addEmployeeWithParams(RentCompany newCompany, String firstName, String lastName,
+                               boolean isManager, String departmentAddress);
 }

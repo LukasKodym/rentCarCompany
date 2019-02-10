@@ -18,4 +18,13 @@ public class Employee {
         this.isManager = isManager;
         this.dept = dept;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isManager=" + isManager +
+                '}';
+    }
 }

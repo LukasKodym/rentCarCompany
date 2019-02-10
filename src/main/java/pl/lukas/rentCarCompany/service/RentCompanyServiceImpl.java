@@ -1,9 +1,11 @@
 package pl.lukas.rentCarCompany.service;
 
 import pl.lukas.rentCarCompany.domain.Department;
+import pl.lukas.rentCarCompany.domain.Employee;
 import pl.lukas.rentCarCompany.domain.RentCompany;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RentCompanyServiceImpl implements RentCompanyService {
@@ -25,6 +27,21 @@ public class RentCompanyServiceImpl implements RentCompanyService {
         }
         return newCompany;
     }
+
+    public void addEmployeeWithParams(RentCompany newCompany, String firstName, String lastName, boolean isManager, String deptartamentAddress) {
+        Optional<Department> department = findDepartmentByAddress(newCompany, deptartamentAddress);
+
+        if(department.isPresent()) {
+            Employee emp = new Employee(firstName, lastName, isManager, department.get());
+            department.get().getEmployeeList().add(emp);
+            System.out.println("Employee added");
+        }
+        else {
+            System.out.println("Cannot add employee to departament that does not exist");
+        }
+    }
+
+
 
     private static boolean checkIfDepartmentExists(String address, List<Department> departmentList) {
         int size = departmentList
@@ -52,5 +69,13 @@ public class RentCompanyServiceImpl implements RentCompanyService {
                 }
             }
         }
+    }
+
+    private Optional<Department> findDepartmentByAddress(RentCompany newCompany, String departmentAddress) {
+        List<Department> departmentList = newCompany.getDepartment();
+        return departmentList
+                .stream()
+                .filter(dep -> dep.getDeptAddress().equalsIgnoreCase(departmentAddress))
+                .findFirst();
     }
 }
