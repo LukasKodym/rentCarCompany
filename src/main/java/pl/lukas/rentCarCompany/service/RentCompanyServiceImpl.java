@@ -26,7 +26,7 @@ public class RentCompanyServiceImpl implements RentCompanyService {
         return newCompany;
     }
 
-    private static boolean checkIfDepartamentExists(String address, List<Department> departmentList) {
+    private static boolean checkIfDepartmentExists(String address, List<Department> departmentList) {
         int size = departmentList
                 .stream()
                 .filter(d -> d.getDeptAddress().equalsIgnoreCase(address))
@@ -36,14 +36,14 @@ public class RentCompanyServiceImpl implements RentCompanyService {
     }
 
     public void addDepartmentToCompany(RentCompany newCompany, String address) {
-        if (!checkIfDepartamentExists(address, newCompany.getDepartment())) {
+        if (!checkIfDepartmentExists(address, newCompany.getDepartment())) {
             Department department = new Department(address);
             newCompany.getDepartment().add(department);
         }
     }
 
     public void removeDepartmentToCompany(RentCompany newCompany, String address) {
-        if (checkIfDepartamentExists(address, newCompany.getDepartment())) {
+        if (checkIfDepartmentExists(address, newCompany.getDepartment())) {
             List<Department> departmentList = newCompany.getDepartment();
             for (Department d : departmentList) {
                 if (d.getDeptAddress().equalsIgnoreCase(address)) {

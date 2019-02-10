@@ -49,6 +49,8 @@ public class Main {
 
 
 
+
+
     }
 
     private static RentCompany createCompany(Scanner scanner, RentCompanyService rentCompanyService) {
